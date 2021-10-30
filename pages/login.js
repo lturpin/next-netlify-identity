@@ -24,6 +24,18 @@ const Login = () => {
     e.preventDefault();
     setSubmitting(true);
 
+    auth
+      .login(formData.email, formData.password, true)
+      .then((response) => {
+        showMessage(
+          `Success! Response: ${JSON.stringify({ response })}`,
+          form
+        );
+      })
+      .catch((error) =>
+        showMessage(`Failed :( ${JSON.stringify(error)}`, form)
+      );
+
     console.log(formData);
     setFormData({
       reset: true,
