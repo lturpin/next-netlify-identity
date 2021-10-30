@@ -13,7 +13,7 @@ export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   const auth = new GoTrue({
-    APIUrl: 'https://lt-next-netlify-identity.netlify.app/',
+    APIUrl: 'https://lt-next-netlify-identity.netlify.app/.netlify/identity',
     audience: '',
     setCookie: false,
   });
