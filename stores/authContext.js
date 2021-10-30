@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
 import netlifyIdentity from 'netlify-identity-widget';
+import GoTrue from 'gotrue-js';
 
 const AuthContext = createContext({
   user: null,
@@ -11,27 +12,31 @@ const AuthContext = createContext({
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
+  const auth = new GoTrue({
+    APIUrl: 'https://lt-next-netlify-identity.netlify.app/',
+    audience: '',
+    setCookie: false,
+  });
+
   useEffect(() => {
     netlifyIdentity.on('login', (user) => {
       setUser(user);
       netlifyIdentity.close();
       console.log('login event');
-    })
+    });
     // init netlify identity connect
-    netlifyIdentity.init()
+    netlifyIdentity.init();
 
     return () => {
       netlifyIdentity.off('login');
     };
   }, []);
 
-  
-
   const login = () => {
     netlifyIdentity.open();
-  }
+  };
 
-  const context = { user, login }
+  const context = { user, login, auth };
   return (
     <AuthContext.Provider value={context}>
       {children}

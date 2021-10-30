@@ -22,6 +22,16 @@ export default function Navbar() {
               <a>Guides</a>
             </Link>
           </li>
+          <li>
+            <Link href="/signup">
+              <a>Sign Up</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/login">
+              <a>Login</a>
+            </Link>
+          </li>
           <li onClick={login} className="btn">
             Login/Signup
           </li>

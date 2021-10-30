@@ -1,3 +1,4 @@
+import Message from '../components/Message'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
