@@ -1,5 +1,6 @@
 import { useReducer, useState, useContext } from 'react';
 import AuthContext from '../stores/authContext';
+import Message from '../components/Message';
 import * as styles from '../styles/Signup.module.css';
 
 const formReducer = (state, event) => {
@@ -26,15 +27,24 @@ const Login = () => {
 
     auth
       .login(formData.email, formData.password, true)
-      .then((response) => {
-        showMessage(
-          `Success! Response: ${JSON.stringify({ response })}`,
-          form
-        );
-      })
-      .catch((error) =>
-        showMessage(`Failed :( ${JSON.stringify(error)}`, form)
-      );
+      .then((response) => (
+        <>
+          <Message
+            message="Succcessfully Logged in"
+            level="success"
+          />
+          {console.log('Success', response)}
+        </>
+      ))
+      .catch((error) => (
+        <>
+          <Message
+            message={`Failed: (${JSON.stringify(error)})`}
+            level="danger"
+          />
+          {console.log(`Failed: ${JSON.stringify(error)}`)}
+        </>
+      ));
 
     console.log(formData);
     setFormData({
